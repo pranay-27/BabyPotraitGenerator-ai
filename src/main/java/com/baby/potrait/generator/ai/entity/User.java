@@ -1,10 +1,8 @@
 package com.baby.potrait.generator.ai.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -38,6 +36,9 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Portrait> portraits;
 
     @Override
     public String toString() {
