@@ -2,6 +2,7 @@ package com.baby.potrait.generator.ai.service;
 
 import com.baby.potrait.generator.ai.entity.Portrait;
 import com.baby.potrait.generator.ai.entity.Style;
+import com.baby.potrait.generator.ai.entity.User;
 import com.baby.potrait.generator.ai.repository.PortraitRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,4 +59,22 @@ public class PortraitService {
     // public List<Portrait> getAllPortraits() {
     //     return portraitRepository.findAll();
     // }
+    public Portrait generatePortrait(User user, Style style, String uploadedFileUrl, String uploadedFileName) throws Exception {
+        String generatedImageUrl = callAI(uploadedFileUrl, style.getPrompt());
+        
+
+        Portrait portrait = new Portrait();
+        portrait.setUser(user);
+        portrait.setStyle(style);
+        portrait.setUploadedFileUrl(uploadedFileUrl);
+        portrait.setUploadedFileName(uploadedFileName);
+        portrait.setGeneratedImageUrl(generatedImageUrl);
+
+        return portraitRepository.save(portrait);
+    }
+
+    private String callAI(String uploadedFileUrl, String prompt) {
+        // TODO Auto-generated method stub
+        return "https://res.cloudinary.com/demo/image/upload/generated-baby-portrait.jpg";
+    }
 }
