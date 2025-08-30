@@ -77,11 +77,11 @@ public class Portrait {
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "style_id", nullable = false)
+    @JoinColumn(name = "style_id")
     private Style style;
 
     public Portrait(LocalDateTime createdAt, String generatedImageUrl, Long id, Style style, String uploadedFileName, String uploadedFileUrl, User user) {
@@ -92,5 +92,9 @@ public class Portrait {
         this.uploadedFileName = uploadedFileName;
         this.uploadedFileUrl = uploadedFileUrl;
         this.user = user;
+    }
+
+    public Portrait() {
+        
     }
 }
